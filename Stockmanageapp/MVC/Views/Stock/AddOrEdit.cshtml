@@ -1,0 +1,45 @@
+﻿@model MVC.Models.mvcStockModel
+@{
+    ViewBag.Title = "AddOrEdit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h1>Insert Stock Details</h1>
+
+<div class="form-body">
+    @using (Html.BeginForm())
+    {
+        @Html.HiddenFor(model => model.Stock_Id)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Stock_Name)
+            @Html.EditorFor(model => model.Stock_Name)
+            @Html.ValidationMessageFor(model => model.Stock_Name)
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Stock_type)
+            @Html.EditorFor(model => model.Stock_type)
+            @Html.ValidationMessageFor(model => model.Stock_type)
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Stock_qty)
+            @Html.EditorFor(model => model.Stock_qty)
+            @Html.ValidationMessageFor(model => model.Stock_qty)
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Stock_preorderlevel)
+            @Html.EditorFor(model => model.Stock_preorderlevel)
+            @Html.ValidationMessageFor(model => model.Stock_preorderlevel)
+        </div>
+
+        <div class="form-group">
+            <input type="submit" value="Submit" class="btn button bg-primary" />
+            <input type="reset" value="Reset" class="btn button bg-primary" />
+        </div>
+    }
+</div>
+
+
+@section scripts{
+    @Scripts.Render("~/bundles/jqueryval");
+}

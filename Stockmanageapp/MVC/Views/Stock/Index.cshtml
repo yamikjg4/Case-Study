@@ -1,0 +1,69 @@
+﻿@model IEnumerable<MVC.Models.mvcStockModel>
+
+@{
+    ViewBag.Title = "Index";
+}
+<h1> View Stock</h1>
+<p>
+    <a href="@Url.Action("AddOrEdit","Stock")" class="btn btn-default"><i class="fa fa-plus"></i> Create New</a>
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Stock_Id)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Stock_Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Stock_type)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Stock_qty)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Stock_preorderlevel)
+        </th>
+        <th>Actions</th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Stock_Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Stock_Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Stock_type)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Stock_qty)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Stock_preorderlevel)
+            </td>
+            <td>
+                <a href="@Url.Action("AddOrEdit", "Stock", new { id = item.Stock_Id})" class="btn btn-default"><i class="fa fa-pencil"></i>  Edit</a>
+                <a onclick="Delete(@item.Stock_Id)" class="btn btn-default"><i class="fa fa-trash"></i>  Delete</a>
+            </td>
+        </tr>
+    }
+
+</table>
+@section scripts{
+    <script>
+        $(function () {
+            var successMessage = '@TempData["SuccessMessage"]'
+            if (successMessage != '')
+                alertify.success(successMessage);
+        });
+    function Delete(id) {
+            alertify.confirm('Web Api CRUD Operations','Are You Sure to Delete this Record ?',function(){
+                window.location.href  = '@Url.Action("Delete","Stock")/'+id;
+            },null );
+        }
+    </script>
+}
